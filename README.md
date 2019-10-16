@@ -98,8 +98,6 @@ You have to implement an abstracted and simple library system.
 
 2. Open in your favorite IDE.
 
-   > **Hint**: We recommend [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea).
-
 3. Start the kata.
 
 4. Discuss with your friends and/or colleges your solution.
