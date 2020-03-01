@@ -23,7 +23,7 @@ module Utils
     def process_csv
       @csv_data = CSV.read(@csv_file, col_sep: ';')
 
-      @csv_fields = @csv_data.shift.split(';').flatten
+      @csv_fields = @csv_data.shift.split(';').flatten.map(&:underscore)
       validate_fields
 
       creator_class = "#{base_class.to_s.pluralize}::Creator".constantize
@@ -33,9 +33,7 @@ module Utils
     def validate_fields
       aux_fields = @csv_fields.dup
 
-      fields.each do |column|
-        aux_fields.delete(column.to_s.underscore)
-      end
+      fields.each { |column| aux_fields.delete(column) }
 
       return if aux_fields.empty?
 
