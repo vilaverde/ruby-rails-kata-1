@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      authors: Author
+    attributes:
+      author:
+        id: ID
+        title: Title
+        description: Description
+        isbn: ISBN
+        books: Books
