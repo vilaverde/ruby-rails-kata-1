@@ -5,12 +5,22 @@ module Books
     end
 
     def call
+      @raise_error = false
+      process_books
+    end
+
+    def call!
+      @raise_error = true
+      process_books
+    end
+
+    private
+
+    def process_books
       return create_books if @params.is_a?(Array)
 
       create_book
     end
-
-    private
 
     def create_books
       ActiveRecord::Base.transaction do
@@ -25,14 +35,17 @@ module Books
 
     def create_book(data = @params)
       book = Book.new(data)
-      return book.tap { |a| a.save } if book.valid?
 
-      raise(CustomErrors::ModelError,
-            I18n.t(:model_error,
-                   scope: :errors,
-                   model_name: 'Book',
-                   data: data.to_s,
-                   message: book.errors.full_messages.to_s))
+      if !book.valid? && @raise_error
+        raise(CustomErrors::ModelError,
+              I18n.t(:model_error,
+                     scope: :errors,
+                     model_name: 'Book',
+                     data: data.to_s,
+                     message: book.errors.full_messages.to_s))
+      end
+
+      book.tap { |a| a.save }
     end
   end
 end
