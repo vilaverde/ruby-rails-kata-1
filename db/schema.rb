@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_01_200438) do
+ActiveRecord::Schema.define(version: 2020_03_01_200829) do
 
   create_table "authors", force: :cascade do |t|
     t.string "email"
     t.string "firstname"
     t.string "lastname"
+  end
+
+  create_table "authors_books", id: false, force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "book_id", null: false
+    t.index ["author_id", "book_id"], name: "index_authors_books_on_author_id_and_book_id"
+    t.index ["book_id", "author_id"], name: "index_authors_books_on_book_id_and_author_id"
   end
 
   create_table "books", force: :cascade do |t|
