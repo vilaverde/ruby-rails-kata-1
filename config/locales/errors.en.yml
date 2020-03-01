@@ -1,0 +1,4 @@
+en:
+  errors:
+    csv_read_error: CSV has invalid headers for class %{base_class}
+    model_error: Error creating %{model_name} for %{data} with message %{message}
