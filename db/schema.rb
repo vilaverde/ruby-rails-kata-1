@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_01_200829) do
+ActiveRecord::Schema.define(version: 2020_03_01_201940) do
 
   create_table "authors", force: :cascade do |t|
     t.string "email"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 2020_03_01_200829) do
     t.string "description"
     t.string "isbn"
     t.index ["isbn"], name: "index_books_on_isbn"
+  end
+
+  create_table "magazines", force: :cascade do |t|
+    t.string "title"
+    t.datetime "published_at"
+    t.string "isbn"
   end
 
 end
