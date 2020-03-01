@@ -5,12 +5,22 @@ module Magazines
     end
 
     def call
+      @raise_error = false
+      process_magazines
+    end
+
+    def call!
+      @raise_error = true
+      process_magazines
+    end
+
+    private
+
+    def process_magazines
       return create_magazines if @params.is_a?(Array)
 
       create_magazine
     end
-
-    private
 
     def create_magazines
       ActiveRecord::Base.transaction do
@@ -25,14 +35,17 @@ module Magazines
 
     def create_magazine(data = @params)
       magazine = Magazine.new(data)
-      return magazine.tap { |a| a.save } if magazine.valid?
 
-      raise(CustomErrors::ModelError,
-            I18n.t(:model_error,
-                   scope: :errors,
-                   model_name: 'Magazine',
-                   data: data.to_s,
-                   message: magazine.errors.full_messages.to_s))
+      if !magazine.valid? && @raise_error
+        raise(CustomErrors::ModelError,
+              I18n.t(:model_error,
+                     scope: :errors,
+                     model_name: 'Magazine',
+                     data: data.to_s,
+                     message: magazine.errors.full_messages.to_s))
+      end
+
+      magazine.tap { |a| a.save }
     end
   end
 end
