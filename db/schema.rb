@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_01_202248) do
+ActiveRecord::Schema.define(version: 2020_03_01_215909) do
 
   create_table "authors", force: :cascade do |t|
     t.string "email"
@@ -18,31 +18,19 @@ ActiveRecord::Schema.define(version: 2020_03_01_202248) do
     t.string "lastname"
   end
 
-  create_table "authors_books", id: false, force: :cascade do |t|
+  create_table "authors_publications", id: false, force: :cascade do |t|
     t.integer "author_id", null: false
-    t.integer "book_id", null: false
-    t.index ["author_id", "book_id"], name: "index_authors_books_on_author_id_and_book_id"
-    t.index ["book_id", "author_id"], name: "index_authors_books_on_book_id_and_author_id"
+    t.integer "publication_id", null: false
+    t.index ["author_id", "publication_id"], name: "index_authors_publications_on_author_id_and_publication_id"
+    t.index ["publication_id", "author_id"], name: "index_authors_publications_on_publication_id_and_author_id"
   end
 
-  create_table "authors_magazines", id: false, force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.integer "magazine_id", null: false
-    t.index ["author_id", "magazine_id"], name: "index_authors_magazines_on_author_id_and_magazine_id"
-    t.index ["magazine_id", "author_id"], name: "index_authors_magazines_on_magazine_id_and_author_id"
-  end
-
-  create_table "books", force: :cascade do |t|
+  create_table "publications", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.string "isbn"
-    t.index ["isbn"], name: "index_books_on_isbn"
-  end
-
-  create_table "magazines", force: :cascade do |t|
-    t.string "title"
     t.datetime "published_at"
-    t.string "isbn"
+    t.index ["isbn"], name: "index_publications_on_isbn"
   end
 
 end
