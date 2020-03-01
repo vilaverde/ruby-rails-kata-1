@@ -1,0 +1,17 @@
+version: "3"
+services:
+  app:
+    container_name: ruby-rails-kata-1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c 'rm -f tmp/pids/server.pid && bin/rails server --port 3090 --binding 0.0.0.0'
+    ports:
+    - 3090:3090
+    volumes:
+    - .:/ruby-rails-kata-1
+    - gems:/gems
+    tty: true
+    stdin_open: true
+volumes:
+  gems:
