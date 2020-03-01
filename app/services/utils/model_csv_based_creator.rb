@@ -16,6 +16,10 @@ module Utils
       raise(NotImplemented)
     end
 
+    def fields
+      raise(NotImplemented)
+    end
+
     def process_csv
       @csv_data = CSV.read(@csv_file, col_sep: ';')
 
@@ -29,7 +33,7 @@ module Utils
     def validate_fields
       aux_fields = @csv_fields.dup
 
-      base_class.column_names.each do |column|
+      fields.each do |column|
         aux_fields.delete(column.to_s.underscore)
       end
 

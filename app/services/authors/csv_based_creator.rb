@@ -3,5 +3,9 @@ module Authors
     def base_class
       Author
     end
+
+    def fields
+      Author.column_names
+    end
   end
 end
