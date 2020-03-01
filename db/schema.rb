@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_01_201940) do
+ActiveRecord::Schema.define(version: 2020_03_01_202248) do
 
   create_table "authors", force: :cascade do |t|
     t.string "email"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 2020_03_01_201940) do
     t.integer "book_id", null: false
     t.index ["author_id", "book_id"], name: "index_authors_books_on_author_id_and_book_id"
     t.index ["book_id", "author_id"], name: "index_authors_books_on_book_id_and_author_id"
+  end
+
+  create_table "authors_magazines", id: false, force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "magazine_id", null: false
+    t.index ["author_id", "magazine_id"], name: "index_authors_magazines_on_author_id_and_magazine_id"
+    t.index ["magazine_id", "author_id"], name: "index_authors_magazines_on_magazine_id_and_author_id"
   end
 
   create_table "books", force: :cascade do |t|
