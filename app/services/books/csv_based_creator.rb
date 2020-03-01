@@ -1,11 +1,11 @@
-module Authors
+module Books
   class CsvBasedCreator < Utils::ModelCsvBasedCreator
     def base_class
-      Author
+      Book
     end
 
     def fields
-      Author.column_names
+      Book.column_names | ['authors']
     end
   end
 end
