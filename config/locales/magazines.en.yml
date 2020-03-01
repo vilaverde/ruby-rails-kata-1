@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      magazines: Magazines
+    attributes:
+      magazine:
+        id: ID
+        title: Title
+        published_at: Published At
+        isbn: ISBN
